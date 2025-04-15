@@ -1,0 +1,113 @@
+:root {
+  --color-1: #0f1016;
+  --text-color: #f0f0f0;
+  --accent-color: #f97316;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+html {
+  font-size: 12pt;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+nav {
+  height: 60px;
+  background-color: var(--color-1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: red; */
+}
+
+nav a {
+  height: 100%;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: background-color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  background-color: var(--accent-color);
+}
+
+nav img {
+  fill: var(--text-color);
+}
+
+#sidebar-activate {
+  display: none;
+}
+
+.navbar__logo {
+  color: white;
+  flex-grow: 2;
+  font-size: clamp(1.2rem, 2vw + 1rem, 2rem);
+  padding-left: 20px;
+}
+
+:is(.open-sidebar-button, .close-sidebar-button) {
+  display: none;
+}
+
+@media (max-width: 610px) {
+  .links-container {
+    /*! No se puede animar la propiedad display*/
+    /* display: none;  */
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    /* ? We go to use the right property to hide the sidebar and animate it with the transition property */
+    right: -100%;
+    z-index: 10;
+    width: 200px;
+    background-color: var(--color-1);
+    justify-content: flex-start;
+
+    & a {
+      width: 100%;
+      padding: 10px 20px;
+      justify-content: flex-start; /*? Para alinear a la izquierda*/
+
+      box-sizing: border-box;
+      height: auto;
+    }
+  }
+
+  :is(.open-sidebar-button, .close-sidebar-button) {
+    display: block;
+    padding: 10px 15px;
+  }
+
+  #sidebar-activate:checked ~ .links-container {
+    right: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  #sidebar-activate:checked ~ #overlay {
+    /* filter: blur(15px); */
+    background-color: #444445a4;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    transition: all 0.5s ease-in-out;
+  }
+}
